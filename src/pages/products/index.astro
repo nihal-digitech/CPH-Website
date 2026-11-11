@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CategoryCard from '../../components/CategoryCard.astro';
+import PageHero from '../../components/PageHero.astro';
+import { categories } from '../../data/catalogue';
+---
+
+<BaseLayout title="Products | Cannanore Plastic House, Kannur" description="Explore household, kitchen, packaging, commercial, industrial and agricultural product categories at CPH in Kannur.">
+  <PageHero eyebrow="CPH catalogue" title="Products for home, work and everyday operations." description="Browse CPH's major product categories and contact the team directly about the items you need." />
+  <section class="section">
+    <div class="container">
+      <div class="grid">
+        {categories.map((category) => <CategoryCard category={category} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  @media (max-width: 64rem) { .grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 44rem) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 30rem) { .grid { grid-template-columns: 1fr; } }
+</style>

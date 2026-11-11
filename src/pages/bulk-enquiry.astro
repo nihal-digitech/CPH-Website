@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BulkEnquiryForm from '../components/BulkEnquiryForm.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<BaseLayout title="Bulk Enquiry | Cannanore Plastic House" description="Send Cannanore Plastic House a bulk product enquiry for commercial, packaging, industrial, agricultural or hospitality requirements.">
+  <PageHero eyebrow="For businesses" title="Start a bulk enquiry with CPH." description="Tell us about your business, the product category and approximate quantity required. The team can then respond to your enquiry." />
+  <section class="section"><div class="container content"><div><p class="eyebrow">Bulk & commercial requirements</p><h2 class="section-heading">Useful details lead to a better response.</h2><ul><li>Your business or company name</li><li>The category or product you are interested in</li><li>The quantity you expect to need</li><li>Any specific enquiry details</li></ul></div><BulkEnquiryForm /></div></section>
+</BaseLayout>
+
+<style>
+  .content { display: grid; grid-template-columns: 0.75fr 1.25fr; align-items: start; gap: clamp(2rem, 6vw, 6rem); }
+  ul { display: grid; gap: 0.6rem; margin: 1.5rem 0 0; padding: 0; list-style: none; color: var(--muted); } li { display: grid; grid-template-columns: 1.2rem 1fr; } li::before { content: '•'; color: var(--accent); font-weight: 900; }
+  @media (max-width: 48rem) { .content { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site, whatsappUrl } from '../data/site';
+
+const mapEmbedUrl = 'https://maps.google.com/maps?q=PPS%20Tower%2C%20M.A.%20Road%2C%20Kannur%2C%20Kerala%20670001&z=16&output=embed';
+---
+
+<BaseLayout title="Visit CPH in Kannur | Cannanore Plastic House" description="Visit Cannanore Plastic House at PPS Tower on M.A. Road, Kannur. View opening hours, contact details and directions.">
+  <PageHero eyebrow="Contact & visit" title="Find CPH in the heart of Kannur." description="Visit the showroom for household essentials, packaging materials and commercial product requirements." />
+  <section class="section"><div class="container contact-grid"><div><p class="eyebrow">Showroom information</p><h2 class="section-heading">Plan your visit.</h2><address>{site.address.lines.map((line) => <>{line}<br /></>)}<span>{site.address.landmark}</span></address><dl><div><dt>Hours</dt><dd>{site.openingHours}</dd></div><div><dt>Phone</dt><dd><a href={site.phoneHref}>{site.phone}</a></dd></div><div><dt>Email</dt><dd><a href={site.emailHref}>{site.email}</a></dd></div></dl><div class="button-row"><a class="button" href={site.mapUrl} target="_blank" rel="noopener noreferrer">Get directions</a><a class="button button--outline" href={whatsappUrl('Hello CPH, I would like to make an enquiry.')} target="_blank" rel="noopener noreferrer">WhatsApp CPH</a></div></div><div class="map"><iframe title="Map showing Cannanore Plastic House in Kannur" src={mapEmbedUrl} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div></div></section>
+  <section class="section section--canvas" aria-labelledby="showroom-heading"><div class="container"><p class="eyebrow">At the showroom</p><h2 id="showroom-heading" class="section-heading">Explore CPH in person.</h2><div class="gallery"><img src="/images/showroom/showroom-08.webp" loading="lazy" alt="CPH showroom display" /><img src="/images/showroom/showroom-09.webp" loading="lazy" alt="CPH showroom display" /><img src="/images/showroom/showroom-10.webp" loading="lazy" alt="CPH showroom display" /></div></div></section>
+</BaseLayout>
+
+<style>
+  .contact-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2rem, 6vw, 6rem); }
+  address { margin-top: 1.2rem; color: var(--muted); font-style: normal; } address span { display: inline-block; margin-top: 0.4rem; }
+  dl { display: grid; gap: 0.8rem; margin: 2rem 0 0; } dl div { display: grid; grid-template-columns: 6rem 1fr; gap: 1rem; } dt { color: var(--muted); } dd { margin: 0; font-weight: 750; } dd a { text-underline-offset: 0.2em; }
+  .map { overflow: hidden; min-height: 30rem; border-radius: var(--radius-lg); background: var(--canvas); } iframe { width: 100%; height: 100%; min-height: 30rem; border: 0; }
+  .gallery { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 1rem; margin-top: 2rem; } .gallery img { width: 100%; height: 20rem; border-radius: var(--radius); object-fit: cover; } .gallery img:first-child { height: 24rem; }
+  @media (max-width: 46rem) { .contact-grid { grid-template-columns: 1fr; } .map, iframe { min-height: 22rem; } .gallery { grid-template-columns: 1fr; } .gallery img, .gallery img:first-child { height: 20rem; } }
+</style>

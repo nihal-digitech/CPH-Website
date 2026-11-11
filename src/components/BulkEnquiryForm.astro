@@ -1,0 +1,46 @@
+---
+import { site, whatsappUrl } from '../data/site';
+
+const formEndpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT;
+const directMessage = 'Hello CPH, I would like to make a bulk product enquiry.';
+---
+
+{formEndpoint ? (
+  <form class="bulk-form surface" action={formEndpoint} method="POST">
+    <div class="bulk-form__grid">
+      <label>Name <input name="name" autocomplete="name" required /></label>
+      <label>Business or company name <input name="company" autocomplete="organization" required /></label>
+      <label>Contact number <input name="phone" type="tel" autocomplete="tel" inputmode="tel" required /></label>
+      <label>Email address <input name="email" type="email" autocomplete="email" required /></label>
+      <label>Business type <input name="business_type" required /></label>
+      <label>Product or category interested in <input name="product_interest" required /></label>
+      <label>Approximate quantity required <input name="quantity" required /></label>
+      <label class="bulk-form__wide">Enquiry details <textarea name="message" rows="5" required></textarea></label>
+    </div>
+    <label class="bulk-form__consent"><input name="consent" type="checkbox" value="yes" required /> <span>{site.consent}</span></label>
+    <button class="button button--accent" type="submit">Submit enquiry</button>
+  </form>
+) : (
+  <section class="bulk-form bulk-form--contact surface" aria-labelledby="form-setup-title">
+    <h2 id="form-setup-title">Talk to CPH about your bulk requirement</h2>
+    <p>The online submission service will be activated before launch. In the meantime, contact the team directly for a prompt response.</p>
+    <div class="button-row">
+      <a class="button button--accent" href={whatsappUrl(directMessage)} target="_blank" rel="noopener noreferrer">WhatsApp CPH</a>
+      <a class="button button--outline" href={site.emailHref}>Email CPH</a>
+    </div>
+  </section>
+)}
+
+<style>
+  .bulk-form { padding: clamp(1.2rem, 3vw, 2rem); }
+  .bulk-form__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  label { display: grid; gap: 0.4rem; color: var(--ink); font-size: 0.87rem; font-weight: 750; }
+  input, textarea { width: 100%; padding: 0.7rem 0.75rem; border: 1px solid #bfbcb5; border-radius: 0.45rem; background: #fff; color: var(--ink); font: inherit; font-weight: 450; }
+  textarea { resize: vertical; }
+  .bulk-form__wide { grid-column: 1 / -1; }
+  .bulk-form__consent { grid-template-columns: auto 1fr; align-items: start; margin-block: 1.2rem; color: var(--muted); font-size: 0.78rem; font-weight: 500; line-height: 1.5; }
+  .bulk-form__consent input { width: 1rem; margin-top: 0.2rem; }
+  .bulk-form--contact h2 { margin: 0; font-size: clamp(1.4rem, 3vw, 2rem); letter-spacing: -0.04em; }
+  .bulk-form--contact p { max-width: 59ch; color: var(--muted); }
+  @media (max-width: 36rem) { .bulk-form__grid { grid-template-columns: 1fr; } }
+</style>

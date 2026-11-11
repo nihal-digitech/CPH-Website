@@ -1,0 +1,57 @@
+---
+import { categories } from '../data/catalogue';
+import { site, whatsappUrl } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="container footer__grid">
+    <div>
+      <p class="footer__mark">CPH</p>
+      <h2>{site.name}</h2>
+      <p class="footer__summary">Household essentials and business solutions in Kannur since {site.founded}.</p>
+      <a class="footer__social" href={site.instagramUrl} target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+    </div>
+    <div>
+      <h3>Explore</h3>
+      <ul>
+        <li><a href="/products/">All products</a></li>
+        <li><a href="/business-solutions/">Business solutions</a></li>
+        <li><a href="/about/">About CPH</a></li>
+        <li><a href="/visit-us/">Visit us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Product categories</h3>
+      <ul>
+        {categories.slice(0, 5).map((category) => <li><a href={`/products/${category.slug}/`}>{category.name}</a></li>)}
+      </ul>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <address>
+        {site.address.lines.map((line) => <span>{line}<br /></span>)}
+      </address>
+      <ul>
+        <li><a href={site.phoneHref}>{site.phone}</a></li>
+        <li><a href={site.emailHref}>{site.email}</a></li>
+        <li><a href={whatsappUrl('Hello CPH, I would like to make an enquiry.')} target="_blank" rel="noopener noreferrer">WhatsApp <span aria-hidden="true">↗</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer__base"><span>© {new Date().getFullYear()} {site.name}</span><span>Serving Kannur since {site.founded}</span></div>
+</footer>
+
+<style>
+  .site-footer { padding-top: clamp(3.5rem, 6vw, 6rem); background: var(--slate-deep); color: #fff; }
+  .footer__grid { display: grid; grid-template-columns: 1.35fr repeat(3, 1fr); gap: 2rem; padding-bottom: 3rem; }
+  .footer__mark { margin: 0 0 0.5rem; font-size: 1.15rem; font-weight: 900; letter-spacing: -0.08em; }
+  h2, h3 { margin: 0; }
+  h2 { font-size: 1.15rem; } h3 { margin-bottom: 0.85rem; font-size: 0.75rem; letter-spacing: 0.09em; text-transform: uppercase; }
+  .footer__summary { max-width: 25ch; color: rgb(255 255 255 / 72%); font-size: 0.92rem; }
+  ul { display: grid; gap: 0.45rem; margin: 0; padding: 0; list-style: none; }
+  li, address { color: rgb(255 255 255 / 75%); font-size: 0.88rem; font-style: normal; }
+  a { color: inherit; } .footer__social { font-size: 0.86rem; font-weight: 800; text-underline-offset: 0.25em; }
+  .footer__base { display: flex; justify-content: space-between; gap: 1rem; padding-block: 1.15rem; border-top: 1px solid rgb(255 255 255 / 20%); color: rgb(255 255 255 / 62%); font-size: 0.78rem; }
+  @media (max-width: 52rem) { .footer__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 32rem) { .footer__grid { grid-template-columns: 1fr; } .footer__base { flex-direction: column; } }
+</style>

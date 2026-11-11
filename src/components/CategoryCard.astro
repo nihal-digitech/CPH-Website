@@ -1,0 +1,44 @@
+---
+import { categoryImage, type Category } from '../data/catalogue';
+
+type Props = {
+  category: Category;
+  compact?: boolean;
+};
+
+const { category, compact = false } = Astro.props;
+---
+
+<article class:list={['category-card', { 'category-card--compact': compact }]}>
+  <a class="category-card__visual" href={`/products/${category.slug}/`} aria-label={`Explore ${category.name}`}>
+    <img src={categoryImage(category)} alt="" loading="lazy" />
+    <span>{category.number}</span>
+    <span class="category-card__visual-label">CPH collection</span>
+  </a>
+  <div class="category-card__body">
+    <p class="category-card__number">Category {category.number}</p>
+    <h3><a href={`/products/${category.slug}/`}>{category.name}</a></h3>
+    {!compact && <p>{category.shortDescription}</p>}
+    <a class="category-card__link" href={`/products/${category.slug}/`}>Explore category <span aria-hidden="true">→</span></a>
+  </div>
+</article>
+
+<style>
+  .category-card { overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; box-shadow: 0 9px 28px rgb(32 33 35 / 5%); }
+  .category-card__visual { position: relative; display: flex; min-height: 13.5rem; align-items: flex-end; justify-content: space-between; overflow: hidden; padding: 1.15rem; background: #e8e5df; color: #fff; text-decoration: none; }
+  .category-card__visual::after { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 38%, rgb(0 0 0 / 48%)); content: ''; }
+  .category-card__visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 240ms ease; }
+  .category-card__visual:hover img { transform: scale(1.03); }
+  .category-card__visual > span { position: relative; z-index: 1; text-shadow: 0 1px 12px rgb(0 0 0 / 45%); }
+  .category-card__visual > :nth-child(2) { font-size: clamp(2.5rem, 4vw, 4.5rem); font-weight: 800; letter-spacing: -0.08em; line-height: 1; }
+  .category-card__visual-label { font-size: 0.67rem; font-weight: 750; letter-spacing: 0.1em; text-transform: uppercase; }
+  .category-card__body { padding: 1.25rem; }
+  .category-card__number { margin: 0 0 0.45rem; color: var(--accent-deep); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+  h3 { margin: 0; font-size: 1.1rem; line-height: 1.25; letter-spacing: -0.02em; }
+  h3 a { text-decoration: none; }
+  .category-card__body > p:not(.category-card__number) { min-height: 3.1em; margin: 0.65rem 0 1rem; color: var(--muted); font-size: 0.88rem; }
+  .category-card__link { color: var(--ink); font-size: 0.86rem; font-weight: 800; text-decoration: none; }
+  .category-card__link span { color: var(--accent); }
+  .category-card--compact .category-card__visual { min-height: 10rem; }
+  .category-card--compact .category-card__body { padding: 1rem; }
+</style>

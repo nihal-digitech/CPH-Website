@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CategoryCard from '../components/CategoryCard.astro';
+import PageHero from '../components/PageHero.astro';
+import { categories } from '../data/catalogue';
+import { whatsappUrl } from '../data/site';
+
+const businessCategories = categories.filter((category) => category.audience !== 'home');
+---
+
+<BaseLayout title="Commercial & Industrial Solutions | CPH Kannur" description="Commercial, industrial, packaging, HORECA, agricultural and construction supply categories from Cannanore Plastic House in Kannur.">
+  <PageHero eyebrow="For businesses" title="Commercial supply solutions, made easier to explore." description="CPH serves hotels, restaurants, retailers, food-service businesses, warehouses, industrial buyers and agricultural or construction requirements." />
+  <section class="section">
+    <div class="container sector-grid">
+      <article><span>01</span><h2>HORECA & food service</h2><p>Explore takeaway containers, disposable service essentials and food packaging products.</p></article>
+      <article><span>02</span><h2>Retail & distribution</h2><p>Find carry bags, packing materials, packaging supplies and practical commercial products.</p></article>
+      <article><span>03</span><h2>Industry & warehousing</h2><p>Browse crates, drums, tubs, bins and other utility-focused commercial categories.</p></article>
+      <article><span>04</span><h2>Agri & construction</h2><p>See tarpaulins, sheets, grow bags, pots and related outdoor-use supplies.</p></article>
+    </div>
+  </section>
+  <section class="section section--canvas" aria-labelledby="business-category-heading"><div class="container"><p class="eyebrow">Business-ready categories</p><h2 id="business-category-heading" class="section-heading">Start with the products relevant to your operation.</h2><div class="grid">{businessCategories.map((category) => <CategoryCard category={category} />)}</div></div></section>
+  <section class="business-cta"><div class="container business-cta__inner"><div><p class="eyebrow">Bulk requirements</p><h2>Tell CPH what your business needs.</h2><p>Share the category, approximate quantity and your business type to begin the conversation.</p></div><div class="button-row"><a class="button button--light" href="/bulk-enquiry/">Bulk enquiry</a><a class="button button--light" href={whatsappUrl('Hello CPH, I would like to make a bulk product enquiry.')} target="_blank" rel="noopener noreferrer">WhatsApp CPH</a></div></div></section>
+</BaseLayout>
+
+<style>
+  .sector-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .sector-grid article { padding: 1.25rem; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
+  .sector-grid span { color: var(--accent-deep); font-size: 0.75rem; font-weight: 850; } .sector-grid h2 { margin: 1.5rem 0 0.5rem; font-size: 1.05rem; line-height: 1.3; } .sector-grid p { margin: 0; color: var(--muted); font-size: 0.88rem; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+  .business-cta { padding-block: clamp(3.5rem, 7vw, 6rem); background: var(--accent); color: #fff; }
+  .business-cta__inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+  .business-cta .eyebrow { color: #ffe0cc; } .business-cta h2 { max-width: 18ch; margin: 0; font-size: clamp(1.8rem, 3.5vw, 3rem); letter-spacing: -0.04em; } .business-cta p:not(.eyebrow) { color: rgb(255 255 255 / 84%); }
+  .business-cta .button-row { margin-top: 0; }
+  @media (max-width: 60rem) { .sector-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 46rem) { .grid { grid-template-columns: repeat(2, 1fr); } .business-cta__inner { display: block; } .business-cta .button-row { margin-top: 1.5rem; } }
+  @media (max-width: 30rem) { .sector-grid, .grid { grid-template-columns: 1fr; } }
+</style>

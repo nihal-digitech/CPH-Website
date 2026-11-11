@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CategoryCard from '../components/CategoryCard.astro';
+import { categories } from '../data/catalogue';
+import { site, whatsappUrl } from '../data/site';
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="container hero__grid">
+      <div class="hero__content">
+        <p class="eyebrow">Serving Kannur since {site.founded}</p>
+        <h1 class="display">Everyday essentials, ready for home and business.</h1>
+        <p class="lede">Explore household plastics, kitchen essentials, packaging materials, commercial supplies and practical solutions for growing businesses.</p>
+        <div class="button-row">
+          <a class="button" href="/products/">Explore products</a>
+          <a class="button button--outline" href="/bulk-enquiry/">Bulk enquiry</a>
+        </div>
+      </div>
+      <div class="hero__image-wrap">
+        <img class="hero__image" src="/images/showroom/showroom-01.webp" alt="Cannanore Plastic House showroom in Kannur" />
+        <p>CPH, Kannur</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--canvas" aria-labelledby="category-heading">
+    <div class="container">
+      <div class="section-intro">
+        <div><p class="eyebrow">Explore the range</p><h2 id="category-heading" class="section-heading">Products for daily life and demanding work.</h2></div>
+        <a class="section-intro__link" href="/products/">View all categories <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="category-grid">
+        {categories.map((category) => <CategoryCard category={category} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section business-feature" aria-labelledby="business-heading">
+    <div class="container business-feature__grid">
+      <div>
+        <p class="eyebrow">For businesses</p>
+        <h2 id="business-heading" class="section-heading">Practical supply solutions for business operations.</h2>
+        <p class="lede">From food packaging and takeaway supplies to crates, bins, wraps, sheets and bulk essentials, CPH helps businesses find products for everyday operations.</p>
+        <div class="button-row"><a class="button" href="/business-solutions/">Explore business solutions</a><a class="button button--outline" href="/bulk-enquiry/">Make a bulk enquiry</a></div>
+      </div>
+      <ul class="business-feature__list">
+        <li><span>01</span> HORECA essentials</li>
+        <li><span>02</span> Packaging & takeaway supplies</li>
+        <li><span>03</span> Industrial crates & commercial bins</li>
+        <li><span>04</span> Agriculture & construction sheets</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="why-heading">
+    <div class="container">
+      <p class="eyebrow">Why CPH</p>
+      <h2 id="why-heading" class="section-heading">A well-established local destination for more than one kind of need.</h2>
+      <div class="reason-grid">
+        <article><span>01</span><h3>Serving Kannur since 1968</h3><p>A longstanding local business with decades of experience.</p></article>
+        <article><span>02</span><h3>Range for home and business</h3><p>Household necessities alongside commercial, industrial and agricultural products.</p></article>
+        <article><span>03</span><h3>Easy product enquiries</h3><p>Ask about a specific item directly through WhatsApp.</p></article>
+        <article><span>04</span><h3>Visit the showroom</h3><p>Find CPH on M.A. Road, close to Kannur Railway Station.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section about-preview">
+    <div class="container about-preview__grid">
+      <img src="/images/showroom/showroom-02.webp" loading="lazy" alt="Inside Cannanore Plastic House showroom" />
+      <div>
+        <p class="eyebrow">About CPH</p>
+        <h2 class="section-heading">A familiar Kannur name, with a wide product range.</h2>
+        <p class="lede">Cannanore Plastic House serves individual customers as well as hotels, restaurants, shops, distributors and other commercial buyers.</p>
+        <a class="button button--outline" href="/about/">Read our story</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--canvas" aria-labelledby="visit-heading">
+    <div class="container visit-preview">
+      <div>
+        <p class="eyebrow">Visit the showroom</p>
+        <h2 id="visit-heading" class="section-heading">Find CPH on M.A. Road.</h2>
+        <address>{site.address.lines.map((line) => <>{line}<br /></>)}<small>{site.address.landmark}</small></address>
+        <p class="visit-preview__hours">{site.openingHours}</p>
+        <div class="button-row"><a class="button" href={site.mapUrl} target="_blank" rel="noopener noreferrer">Get directions</a><a class="button button--outline" href="/visit-us/">Plan your visit</a></div>
+      </div>
+      <div class="visit-preview__images">
+        <img src="/images/showroom/showroom-03.webp" loading="lazy" alt="CPH showroom display" />
+        <img src="/images/showroom/showroom-04.webp" loading="lazy" alt="CPH showroom display" />
+      </div>
+    </div>
+  </section>
+
+  <section class="bulk-banner">
+    <div class="container bulk-banner__inner">
+      <div><p class="eyebrow">Bulk requirements</p><h2>Looking for commercial quantities?</h2><p>Tell CPH what you need, the quantity and your business type.</p></div>
+      <div class="button-row"><a class="button button--light" href="/bulk-enquiry/">Start a bulk enquiry</a><a class="button button--light" href={whatsappUrl('Hello CPH, I would like to make a bulk product enquiry.')} target="_blank" rel="noopener noreferrer">WhatsApp CPH</a></div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { overflow: hidden; padding-block: clamp(3rem, 7vw, 7rem); background: var(--canvas); }
+  .hero__grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr); align-items: center; gap: clamp(2rem, 6vw, 6rem); }
+  .hero__content .lede { margin-bottom: 0; }
+  .hero__image-wrap { position: relative; }
+  .hero__image { width: 100%; min-height: 24rem; border-radius: var(--radius-lg); object-fit: cover; box-shadow: var(--shadow); }
+  .hero__image-wrap p { position: absolute; right: 1rem; bottom: 0; margin: 0; padding: 0.45rem 0.65rem; border-radius: 0.45rem 0.45rem 0 0; background: var(--paper); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+  .section-intro { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; }
+  .section-intro__link { color: var(--ink); font-size: 0.9rem; font-weight: 800; white-space: nowrap; text-decoration: none; }
+  .section-intro__link span { color: var(--accent); }
+  .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .business-feature { background: var(--paper); }
+  .business-feature__grid, .about-preview__grid, .visit-preview { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(2rem, 6vw, 6rem); }
+  .business-feature__list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+  .business-feature__list li { display: grid; grid-template-columns: 2.7rem 1fr; padding: 1rem 0; border-bottom: 1px solid var(--line); font-weight: 750; }
+  .business-feature__list span, .reason-grid > article > span { color: var(--accent-deep); font-size: 0.75rem; font-weight: 850; }
+  .reason-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2rem; }
+  .reason-grid > article { padding: 1.2rem; border-top: 2px solid var(--ink); background: var(--canvas); }
+  .reason-grid h3 { margin: 1.8rem 0 0.45rem; font-size: 1.02rem; line-height: 1.3; }
+  .reason-grid p { margin: 0; color: var(--muted); font-size: 0.88rem; }
+  .about-preview { background: var(--slate-deep); color: #fff; }
+  .about-preview .eyebrow { color: #e5ba9f; }
+  .about-preview .lede { color: rgb(255 255 255 / 76%); }
+  .about-preview img { width: 100%; min-height: 26rem; border-radius: var(--radius-lg); object-fit: cover; }
+  .about-preview .button--outline { border-color: rgb(255 255 255 / 65%); color: #fff; }
+  .about-preview .button--outline:hover { border-color: #fff; background: #fff; color: var(--ink); }
+  .visit-preview address { margin-top: 1.3rem; color: var(--muted); font-style: normal; }
+  .visit-preview address small { display: inline-block; margin-top: 0.35rem; }
+  .visit-preview__hours { font-weight: 750; }
+  .visit-preview__images { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .visit-preview__images img { width: 100%; height: 20rem; border-radius: var(--radius); object-fit: cover; }
+  .visit-preview__images img:last-child { margin-top: 2.5rem; }
+  .bulk-banner { padding-block: clamp(3.5rem, 7vw, 6rem); background: var(--accent); color: #fff; }
+  .bulk-banner__inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+  .bulk-banner .eyebrow { color: #ffe0cc; } .bulk-banner h2 { margin: 0; font-size: clamp(1.8rem, 3.5vw, 3rem); letter-spacing: -0.04em; } .bulk-banner p:not(.eyebrow) { margin-bottom: 0; color: rgb(255 255 255 / 84%); }
+  .bulk-banner .button-row { margin-top: 0; }
+  @media (max-width: 64rem) { .category-grid { grid-template-columns: repeat(3, 1fr); } .reason-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 48rem) { .hero__grid, .business-feature__grid, .about-preview__grid, .visit-preview { grid-template-columns: 1fr; } .hero__image { min-height: 20rem; } .category-grid { grid-template-columns: repeat(2, 1fr); } .bulk-banner__inner { display: block; } .bulk-banner .button-row { margin-top: 1.5rem; } }
+  @media (max-width: 30rem) { .category-grid, .reason-grid { grid-template-columns: 1fr; } .section-intro { align-items: start; flex-direction: column; } }
+</style>

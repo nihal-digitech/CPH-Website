@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CategoryCard from '../../components/CategoryCard.astro';
+import PageHero from '../../components/PageHero.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { categories, type Category } from '../../data/catalogue';
+
+export function getStaticPaths() {
+  return categories.map((category) => ({ params: { slug: category.slug }, props: { category } }));
+}
+
+const { category } = Astro.props as { category: Category };
+const related = categories.filter((item) => item.slug !== category.slug && item.audience === category.audience).slice(0, 3);
+---
+
+<BaseLayout title={`${category.name} | CPH Kannur`} description={`Explore ${category.name.toLowerCase()} at Cannanore Plastic House in Kannur. Contact CPH on WhatsApp to enquire about a product.`}>
+  <PageHero eyebrow={`Category ${category.number}`} title={category.name} description={category.shortDescription} />
+  <section class="section" aria-labelledby="products-heading">
+    <div class="container">
+      <div class="heading"><div><p class="eyebrow">Enquire directly</p><h2 id="products-heading" class="section-heading">Products in this category</h2></div><p>Need commercial quantities? <a href="/bulk-enquiry/">Make a bulk enquiry.</a></p></div>
+      <div class="product-grid">{category.products.map((product) => <ProductCard category={category} product={product} />)}</div>
+      <p class="catalogue-note">Product images are representative. Contact CPH to confirm the product style or availability you need.</p>
+    </div>
+  </section>
+  {related.length > 0 && <section class="section section--canvas" aria-labelledby="related-heading"><div class="container"><p class="eyebrow">Continue exploring</p><h2 id="related-heading" class="section-heading">Related categories</h2><div class="related-grid">{related.map((item) => <CategoryCard category={item} compact />)}</div><a class="button button--outline" href="/products/">Back to all categories</a></div></section>}
+</BaseLayout>
+
+<style>
+  .heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; }
+  .heading > p { margin: 0; color: var(--muted); font-size: 0.9rem; } .heading a { color: var(--ink); font-weight: 800; }
+  .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; }
+  .catalogue-note { margin: 1rem 0 0; color: var(--muted); font-size: 0.82rem; }
+  @media (max-width: 46rem) { .product-grid, .related-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 30rem) { .heading { align-items: start; flex-direction: column; } .product-grid, .related-grid { grid-template-columns: 1fr; } }
+</style>

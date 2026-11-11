@@ -1,0 +1,38 @@
+---
+import { categoryImage, type Category, type Product } from '../data/catalogue';
+import { whatsappUrl } from '../data/site';
+
+type Props = {
+  category: Category;
+  product: Product;
+};
+
+const { category, product } = Astro.props;
+const message = `Hello CPH, I would like to enquire about ${product.name} in ${category.name}.`;
+---
+
+<article class="product-card">
+  <div class="product-card__visual" aria-hidden="true">
+    <img src={categoryImage(category)} alt="" loading="lazy" />
+    <span>{category.number}</span>
+    <span>CPH</span>
+  </div>
+  <div class="product-card__body">
+    <h2>{product.name}</h2>
+    <a href={whatsappUrl(message)} target="_blank" rel="noopener noreferrer">Enquire on WhatsApp <span aria-hidden="true">↗</span></a>
+  </div>
+</article>
+
+<style>
+  .product-card { overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
+  .product-card__visual { position: relative; display: flex; min-height: 13rem; align-items: flex-end; justify-content: space-between; overflow: hidden; padding: 1rem; background: #eeece7; color: #fff; }
+  .product-card__visual::after { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgb(0 0 0 / 45%)); content: ''; }
+  .product-card__visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .product-card__visual span { position: relative; z-index: 1; text-shadow: 0 1px 12px rgb(0 0 0 / 45%); }
+  .product-card__visual :nth-child(2) { font-size: 2.7rem; font-weight: 850; letter-spacing: -0.08em; line-height: 1; }
+  .product-card__visual :last-child { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.11em; }
+  .product-card__body { display: grid; gap: 0.9rem; padding: 1rem; }
+  h2 { margin: 0; font-size: 1rem; line-height: 1.3; letter-spacing: -0.02em; }
+  a { color: var(--ink); font-size: 0.83rem; font-weight: 800; text-decoration: none; }
+  a span { color: var(--accent); }
+</style>
