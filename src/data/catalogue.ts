@@ -169,5 +169,5 @@ export const categories: Category[] = [
 export const categoryBySlug = new Map(categories.map((category) => [category.slug, category]));
 
 export function categoryImage(category: Category) {
-  return `/images/categories/${category.slug}.webp`;
+  return `${import.meta.env.BASE_URL}images/categories/${category.slug}.jpg`;
 }

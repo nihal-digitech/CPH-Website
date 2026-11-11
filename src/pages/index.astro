@@ -18,7 +18,7 @@ import { site, whatsappUrl } from '../data/site';
         </div>
       </div>
       <div class="hero__image-wrap">
-        <img class="hero__image" src="/images/showroom/showroom-01.webp" alt="Cannanore Plastic House showroom in Kannur" />
+        <img class="hero__image" src={`${import.meta.env.BASE_URL}images/hero/dinnerware-kitchenware-household.jpg`} alt="Dinnerware, kitchenware and household products at Cannanore Plastic House" />
         <p>CPH, Kannur</p>
       </div>
     </div>
@@ -68,7 +68,7 @@ import { site, whatsappUrl } from '../data/site';
 
   <section class="section about-preview">
     <div class="container about-preview__grid">
-      <img src="/images/showroom/showroom-02.webp" loading="lazy" alt="Inside Cannanore Plastic House showroom" />
+      <img src={`${import.meta.env.BASE_URL}images/showroom/showroom-02.webp`} loading="lazy" alt="Inside Cannanore Plastic House showroom" />
       <div>
         <p class="eyebrow">About CPH</p>
         <h2 class="section-heading">A familiar Kannur name, with a wide product range.</h2>
@@ -88,8 +88,8 @@ import { site, whatsappUrl } from '../data/site';
         <div class="button-row"><a class="button" href={site.mapUrl} target="_blank" rel="noopener noreferrer">Get directions</a><a class="button button--outline" href="/visit-us/">Plan your visit</a></div>
       </div>
       <div class="visit-preview__images">
-        <img src="/images/showroom/showroom-03.webp" loading="lazy" alt="CPH showroom display" />
-        <img src="/images/showroom/showroom-04.webp" loading="lazy" alt="CPH showroom display" />
+        <img src={`${import.meta.env.BASE_URL}images/showroom/showroom-03.webp`} loading="lazy" alt="CPH showroom display" />
+        <img src={`${import.meta.env.BASE_URL}images/showroom/showroom-04.webp`} loading="lazy" alt="CPH showroom display" />
       </div>
     </div>
   </section>
